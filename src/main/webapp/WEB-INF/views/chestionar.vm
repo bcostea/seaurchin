@@ -1,0 +1,327 @@
+<script language="JavaScript" type="text/JavaScript">
+function goJudet()
+	{
+		var judet = document.getElementById("judetSelectat");
+		location = '?c=$idChestionar&stage=2&judetSelectat=' + judet.value;
+	}
+
+function goLocalitate()
+	{
+		var localitate = document.getElementById("localitateSelectata");
+		location = '?c=$idChestionar&stage=3&judetSelectat=$judetSelectat&localitateSelectata=' + localitate.value;
+	}
+
+function goUnitate()
+	{
+		var unitate = document.getElementById("unitateSelectata");
+		location = '?c=$idChestionar&stage=4&judetSelectat=$judetSelectat&localitateSelectata=$localitateSelectata&unitateSelectata=' + unitate.value;
+	}
+</script>
+
+<form method="post" action="forms-processor.do">
+    <input type='hidden' style='display:none' name='stage' value='$stage' />
+    <input type='hidden' style='display:none' name='idSetRezultat' value='$setRezultat' />
+    <input type='hidden' style='display:none' name='idChestionar' value='$idChestionar' />
+
+    <table class='jlu'>
+    <colgroup><col width='100' /><col/></colgroup>
+    #if ($stage == "1")
+        <tr><td colspan='2'>#springMessage("step1") </td></tr>
+        <tr><td>Judet</td>
+            <td>
+            <select id="judetSelectat" name="judetSelectat" style="width:400px;" onchange="goJudet()">
+            <option value='nimic'>#springMessage("selectcounty")</option>
+            #foreach ($judet in $judete)
+                <option value='$judet'>$judet</option>
+            #end
+            </select>
+            </td>
+        </tr>
+    #end
+
+    #if ($stage == "2")
+        <tr><td>#springMessage("county")</td>
+        <td>
+        <select id="judetSelectat" name="judetSelectat" style="width:400px;"  onchange="goJudet()" >
+        #foreach ($judet in $judete)
+
+            #if($judetSelectat==$judet)
+                <option value='$judet' selected >$judet</option>
+            #else
+                <option value='$judet'>$judet</option>
+            #end
+        #end
+        </select>
+        </td></tr>
+        <tr>
+        <td colspan='2'>
+           #springMessage("step2")
+        </td>
+        </tr>
+
+        <tr><td>
+        Localitate</td>
+        <td>
+        <select id="localitateSelectata" name="localitateSelectata" style="width:400px;" onchange="goLocalitate()" >
+        <option value='nimic' selected>#springMessage("selectcity")</option>
+        #foreach ($localitate in $localitati)
+            #if($localitateSelectata==$localitate)
+                <option value='$localitate' selected>$localitate</option>
+            #else
+                <option value='$localitate'>$localitate</option>
+            #end
+        #end
+        </select>
+        </td>
+        </tr>
+    #end
+
+    #if ($stage == "3")
+        <tr><td>#springMessage("county")</td>
+        <td>
+        <select id="judetSelectat" name="judetSelectat" style="width:400px;"  onchange="goJudet()" >
+        #foreach ($judet in $judete)
+            #if($judetSelectat==$judet)
+                <option value='$judet' selected>$judet</option>
+            #else
+                <option value='$judet'>$judet</option>
+            #end
+        #end
+        </select>
+        </td></tr>
+
+        <tr><td>
+        #springMessage("city")</td>
+        <td>
+        <select id="localitateSelectata" name="localitateSelectata" style="width:400px;" onchange="goLocalitate()" >
+        #foreach ($localitate in $localitati)
+            #if($localitateSelectata==$localitate)
+                <option value='$localitate' selected>$localitate</option>
+            #else
+                <option value='$localitate'>$localitate</option>
+            #end
+        #end
+        </select>
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan='2'>
+            #springMessage("step3")
+        </td>
+        </tr>
+
+        <tr><td>
+        Unitate</td>
+        <td>
+        <select id="unitateSelectata" name="unitateSelectata" style="width:400px;" onchange="goUnitate()">
+        <option value='nimic' selected>#springMessage("selectschool")</option>
+        #foreach ($unitate in $unitati)
+            #if($unitateSelectata==$unitate)
+                <option value='$unitate' selected>$unitate</option>
+            #else
+                <option value='$unitate'>$unitate</option>
+            #end
+        #end
+        </select>
+        </td>
+        </tr>
+    #end
+
+     #if ($stage == "4")
+        <tr><td>#springMessage("county")</td>
+        <td>
+        <select id="judetSelectat" name="judetSelectat" style="width:400px;"  onchange="goJudet()" >
+        #foreach ($judet in $judete)
+            #if($judetSelectat==$judet)
+                <option value='$judet' selected>$judet</option>
+            #else
+                <option value='$judet'>$judet</option>
+            #end
+        #end
+        </select>
+        </td></tr>
+
+        <tr><td>
+        Localitate</td>
+        <td>
+        <select id="localitateSelectata" name="localitateSelectata" style="width:400px;" onchange="goLocalitate()" >
+        #foreach ($localitate in $localitati)
+            #if($localitateSelectata==$localitate)
+                <option value='$localitate' selected>$localitate</option>
+            #else
+                <option value='$localitate'>$localitate</option>
+            #end
+        #end
+        </select>
+        </td>
+        </tr>
+
+        <tr><td>
+        Unitate</td>
+        <td>
+        <select id="unitateSelectata" name="unitateSelectata" style="width:400px;" onchange="goUnitate()" >
+        <option value='nimic' selected>#springMessage("selectschool")</option>
+        #foreach ($unitate in $unitati)
+            #if($unitateSelectata==$unitate)
+                <option value='$unitate' selected>$unitate</option>
+            #else
+                <option value='$unitate'>$unitate</option>
+            #end
+        #end
+        </select>
+        </td>
+        </tr>
+        <tr><td></td><td></td></tr>
+        <tr>
+            <td>#springMessage("license") </td>
+            <td><input type='text' name="seria" value='$serie'/></td>
+        </tr>
+        <tr><td></td><td></td></tr>
+        <tr>
+            <td>#springMessage("stage") </td>
+            <td><input type='text' name="etapa" value='$etapa'/></td>
+        </tr>
+        <tr><td colspan='2'><br/>#springMessage("step4")</td></tr>
+        <tr>
+            <td colspan ='2'>
+                        <input type="hidden" name="user" value="$user" />
+                        #if( $setRezultat != "0" )
+                            #springMessage("hasdata")<br/><br />
+                            <input type='submit' name='act' value='#springMessage("edit")' />
+                        #else
+                            <input type='submit' name='act' value='#springMessage("saveandcontinue")' />
+                        #end
+            </td>
+        </tr>
+
+    #end
+
+    </table>
+</form>
+
+    #if ($stage == "5")
+    <table class="jlu">
+    <colgroup><col width='100' /><col/></colgroup>
+    <thead>
+    <h3>#springMessage("dateunitate")</h3>
+    </thead>
+    <tr>
+    <td>#springMessage("county")</td>
+    <td>$judetSelectat</td>
+    </tr>
+    <tr>
+    <td>#springMessage("city")</td>
+    <td>$localitateSelectata</td>
+    </tr>
+    <tr>
+    <td>#springMessage("school")</td>
+    <td>$unitateSelectata</td>
+    </tr>
+    <tr>
+    <td>#springMessage("license")</td>
+    <td>$serie</td>
+    </tr>
+    <tr>
+    <td>#springMessage("stage")</td>
+    <td>$etapa</td>
+    </tr>
+    </table>
+
+<!-- ----------------------------------------------------------------------------- -->
+
+<br>
+<form method="post" action="forms-processor.do">
+    <input type='hidden' style='display:none' name='stage' value='$stage' />
+    <input type='hidden' style='display:none' name='idChestionar' value='$idChestionar' />
+    <input type='hidden' style='display:none' name='idSetRezultat' value='$setRezultat' />
+
+    #foreach ($section in $chestionar.getSectiuni())
+        <hr>
+        <h3>
+        <a name="$section.getNume()">
+            $section.getNume()
+        </a>
+        </h3>
+            <span style="color:#CC3300;font-weight:bold;margin-left:20px;">$!section.getDetalii()</span>
+        <hr>
+
+        #set($nrCrt=1)
+        #foreach ( $intrebare in $section.getIntrebari())
+            <p>
+            ${nrCrt}. <b>$intrebare.getEnunt()</b>
+            </p>
+            <div style="padding-left:30px;">
+            #foreach ( $optiune in $intrebare.getOptiuni())
+                #if($optiune.getIdTipOptiune().intValue()==1)
+                     #set($cod = "C${chestionar.getIdChestionar()}_I${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}" )
+                     <input style="background-color: rgb(255, 255, 160);" type="text" name="$cod" size="50" value='$!rezultateMap.get("$cod")' />
+                #end
+                #if($optiune.getIdTipOptiune().intValue()==2)
+                    #set($cod ="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}")
+                    <!-- $cod , $rezultateMap.get("$cod"), $optiune.getIdOptiune()  -->
+                            #if( $rezultateMap.get("$cod") == "$optiune.getIdOptiune()" )
+                                <input style="border:0px;background-color:#FFFFFF" type="radio" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" checked="checked" />
+                            #else
+                                <input style="border:0px;background-color:#FFFFFF" type="radio" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" />
+                            #end
+                            ${optiune.getNume()}<br />
+
+                #end
+                #if($optiune.getIdTipOptiune().intValue()==3)
+                    #set($cod ="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}")
+                    #if( $rezultateMap.get("$cod") == "$optiune.getIdOptiune()" )
+                        <input style="border:0px;background-color:#FFFFFF" type="radio" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" checked="checked" />
+                    #else
+                        <input style="border:0px;background-color:#FFFFFF" type="radio" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" />
+                    #end
+                    ${optiune.getNume()}
+                    <br />
+                        #set($cod ="C${chestionar.getIdChestionar()}_IRET${intrebare.getIdIntrebare()}")
+                        <div style='padding-left:20px'>
+                            <input style="background-color: rgb(255, 255, 160);" type="text" name="C${chestionar.getIdChestionar()}_IRET${intrebare.getIdIntrebare()}" size="50" value='$!{rezultateMap.get("$cod")}' /> <br /><br />
+                        </div>
+                #end
+
+                #if($optiune.getIdTipOptiune().intValue()==4)
+                    #set($cod ="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}")
+                    #if( $rezultateMap.get("$cod") == "$optiune.getIdOptiune()" )
+                        <input style="border:0px;background-color:#FFFFFF" type="checkbox" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" checked="checked" />
+                    #else
+                        <input style="border:0px;background-color:#FFFFFF" type="checkbox" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" />
+                    #end
+                    ${optiune.getNume()}<br />
+                #end
+
+                #if($optiune.getIdTipOptiune().intValue()==5)
+                    #set($cod ="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}")
+                    #if( $rezultateMap.get("$cod") == "$optiune.getIdOptiune()" )
+                        <input style="border:0px;background-color:#FFFFFF" type="checkbox" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" checked="checked" />
+                    #else
+                        <input style="border:0px;background-color:#FFFFFF" type="checkbox" name="C${chestionar.getIdChestionar()}_IR${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}" value="C${chestionar.getIdChestionar()}_O${optiune.getIdOptiune()}" size="50" />
+                    #end
+                        ${optiune.getNume()}
+                        <br />
+                        #set($cod ="C${chestionar.getIdChestionar()}_IRET${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}")
+                        <div style='padding-left:20px'>
+                            <input type="text" style="background-color: rgb(255, 255, 160);" name="C${chestionar.getIdChestionar()}_IRET${intrebare.getIdIntrebare()}_O${optiune.getIdOptiune()}" size="50" value='$!{rezultateMap.get("$cod")}' /> <br /><br />
+                        </div>
+                #end
+
+            #end
+            #set($nrCrt=$nrCrt+1)
+                #if( $intrebare.getAreDetalii() == 1 )
+                <span style="color:#CC3300;">
+                    $!intrebare.getDetalii()
+                </span>
+                #end
+            </div>
+        #end
+        <br/><br/>
+    #end
+    <br />
+    <input type="submit" value='#springMessage("submit")' />
+    <br/>
+    <br />
+    #end
+</form>

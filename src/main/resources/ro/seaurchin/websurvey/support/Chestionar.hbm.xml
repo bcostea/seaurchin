@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ro.seaurchin.websurvey.support.Chestionar" table="CHESTIONAR">
+        <id column="ID_CHESTIONAR" name="idChestionar" type="java.lang.Long">
+            <generator class="org.hibernate.id.SequenceGenerator">
+                <param name="table">CHESTIONAR_SEQ</param>
+                <param name="column">NEXT</param>
+            </generator>
+        </id>
+        <property column="NUME" name="nume" type="java.lang.String"/>
+        <property column="DESCRIERE" name="descriere" type="java.lang.String"/>
+
+
+        <set name="sectiuni" lazy="false" inverse="true" cascade="all-delete-orphan" order-by="ID_SECTIUNE">
+            <key column="ID_CHESTIONAR"/>
+            <one-to-many class="ro.seaurchin.websurvey.support.Sectiune"/>
+        </set>
+    </class>
+</hibernate-mapping>

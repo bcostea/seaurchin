@@ -1,0 +1,35 @@
+<br />
+
+<h4>
+#springMessage("chestionar.list")
+</h4>
+
+<table class="layout" cellpadding="1" cellspacing="0">
+    <colgroup><col/><col/><col/></colgroup>
+    <tr>
+        <th>#springMessage("chestionar.nume")</th>
+        <th >#springMessage("chestionar.descriere")</th>
+        <th class="lastcol" style="text-align:center"> #springMessage("add") </th>
+        <th class="lastcol" style="text-align:center"> #springMessage("list") </th>
+
+    </tr>
+#foreach($chestionar in $chestionare)
+    <tr>
+        <td>$chestionar.getNume()</td>
+        <td >$chestionar.getDescriere()</td>
+
+        <td style="text-align:center">
+             <a href="process-chestionar.html?c=$chestionar.getIdChestionar()">
+                 #springMessage("add")
+            </a>
+        </td>
+
+        <td class="lastcol" style="text-align:center">
+             <a href="lista-rezultate.html?chestionar=$chestionar.getIdChestionar()">
+                 #springMessage("list")
+            </a>
+        </td>
+    </tr>
+    #set($ctr=$ctr+1)
+#end
+</table>

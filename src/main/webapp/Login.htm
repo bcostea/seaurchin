@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Web Suvey - Login </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <link href="style/style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div>
+    <div id="title">Web Survey - Logare in sistem</div>
+    <img src="img/logo.gif" alt="Web Survey"/>
+</div>
+<p>
+    Introduceti numele de utilizator si parola pentru a continua.
+</p>
+
+<form method="POST" action="j_acegi_security_check">
+    <table class="jlu">
+        <tr>
+            <td>
+                <label for='j_username'>Nume utilizator</label> <br/>
+                <input type="text" size="15" maxlength="25" id="j_username" name="j_username"><br><br>
+            </td>
+            <td>
+                <label for="j_password">Parola</label> <br/>
+                <input type="password" size="15" maxlength="25" id="j_password" name="j_password"><br><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input value="Login" type="submit">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

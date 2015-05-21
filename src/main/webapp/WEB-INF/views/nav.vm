@@ -1,0 +1,11 @@
+
+<div id="nav">
+<a  class="selected" href="index.html">#springMessage("mainPage")</a>
+
+#if($pagina=="lista-rezultate")
+    <a href="#">#springMessage("statistics")</a>
+#end
+#if($pagina=="chestionar")
+    <a href="lista-rezultate.html?chestionar=${chestionar.getIdChestionar()}">#springMessage("lista-chestionar")</a>
+#end
+</div>

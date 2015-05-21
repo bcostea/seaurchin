@@ -1,0 +1,49 @@
+<div id="sidecontent">
+<h1>#springMessage("loginmenu")</h1>
+        Sunteti logat ca <b> $user </b>. <br />
+        Drepturi de
+        <b>
+        #if($admin==true)
+            Administrator
+        #else
+            Operator
+        #end
+        </b>
+        <br/>
+
+        <p>
+            <a href="logout.html">#springMessage("logout")</a>
+        </p>
+        #if($pagina!="user-detail")
+        <p>
+            <a href="detalii-utilizator.html">#springMessage("user-detail")</a>
+        </p>
+        #end
+
+ </div>
+
+#if($pagina=="chestionar")
+    <div id="sidecontent">
+    <h1>#springMessage("sections")</h1>
+
+        #foreach ($section in $chestionar.getSectiuni())
+            <p>
+            <a href="#$section.getNume()"> $section.getNume()</a>
+            </p>
+        #end
+
+    #if( $setRezultat.intValue() > 0   )
+    <h1>Operatii</h1>
+        <p>
+            <a href="process-chestionar.html?sr=${setRezultat}&amp;actiune=3">Sterge acest chestionar</a>
+
+        </p>
+    </div>
+    #end
+#end
+
+#if($pagina=="chestionar-content")
+<div id="sidecontent">
+</div>
+#end
+

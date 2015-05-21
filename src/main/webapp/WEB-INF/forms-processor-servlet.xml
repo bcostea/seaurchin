@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="forms-processor" class="ro.seaurchin.websurvey.support.FormDataProcessor">
+        <property name="chestionarDao">
+            <ref bean="chestionarDao"/>
+        </property>
+    </bean>
+
+    <bean id="chestionarDao" class="ro.seaurchin.websurvey.support.dao.impl.ChestionarDaoImpl" scope="singleton">
+    </bean>
+
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ro.seaurchin.websurvey.support.rezultate.Rezultat" table="REZULTAT">
+        <id column="ID_REZULTAT" name="idRezultat" type="java.lang.Long">
+            <generator class="org.hibernate.id.SequenceGenerator">
+                <param name="table">REZULTAT_SEQ</param>
+                <param name="column">NEXT</param>
+            </generator>
+        </id>
+        <property column="ID_SET_REZULTAT" name="idSetRezultat" type="java.lang.Long"/>
+        <property column="ID_INTREBARE" name="idIntrebare" type="java.lang.Long"/>
+        <property column="ID_OPTIUNE" name="idOptiune" type="java.lang.Long"/>
+        <property column="CLEAR_TEXT" name="clearText" type="java.lang.String"/>
+        <property column="UCD" name="UCD" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

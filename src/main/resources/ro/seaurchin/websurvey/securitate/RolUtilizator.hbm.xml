@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ro.seaurchin.websurvey.securitate.RolUtilizator" table="ROL_UTILIZATOR">
+        <id column="ID_ROL_UTILIZATOR" name="idRolUtilizator" type="java.lang.Long">
+            <generator class="org.hibernate.id.SequenceGenerator">
+                <param name="table">ROL_UTILIZATOR_SEQ</param>
+                <param name="column">NEXT</param>
+            </generator>
+        </id>
+
+        <property column="NUME" name="numeUtilizator" type="java.lang.String"/>
+        <property column="DENUMIRE" name="denumire" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

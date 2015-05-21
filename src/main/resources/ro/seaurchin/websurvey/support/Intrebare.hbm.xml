@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ro.seaurchin.websurvey.support.Intrebare" table="INTREBARE">
+        <id column="ID_INTREBARE" name="idIntrebare" type="java.lang.Long">
+            <generator class="org.hibernate.id.SequenceGenerator">
+                <param name="table">INTREBARE_SEQ</param>
+                <param name="column">NEXT</param>
+            </generator>
+        </id>
+
+        <property column="ID_SECTIUNE" name="idSectiune" type="java.lang.Long"/>
+        <property column="ORDINE" name="order" type="java.lang.Integer"/>
+        <property column="ENUNT" name="enunt" type="java.lang.String"/>
+        <property column="ARE_DETALII" name="areDetalii" type="java.lang.Integer"/>
+        <property column="DETALII" name="detalii" type="java.lang.String"/>
+        <property column="ARE_CLEAR_TEXT" name="areClearText" type="java.lang.Integer"/>
+
+        <set name="optiuni" lazy="false" inverse="true" cascade="all-delete-orphan" order-by="ID_OPTIUNE">
+            <key column="ID_INTREBARE"/>
+            <one-to-many class="ro.seaurchin.websurvey.support.Optiune"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

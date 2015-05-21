@@ -1,0 +1,18 @@
+<p>
+    Bun venit <b> $user </b><br/>
+    Aveti privilegii de
+    <b>
+    #if($admin==true)
+        Administrator
+    #else
+        Operator
+    #end
+    </b>
+    <br/><br />
+
+    Lista de <a href="chestionare.html">chestionare disponibile</a>.<br/><br/>
+    #if($admin==true)
+    <a href="admin.html">Aici</a> puteti gasi optiunile de administrare.
+    #end
+
+</p>

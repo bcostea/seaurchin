@@ -1,0 +1,87 @@
+<br />
+
+<h4>
+#springMessage("rezultate.list") $chestionar.getNume()
+</h4>
+
+
+<h4>
+    Filtru
+    #if( $existaFiltru == "da" )
+     (aplicat - <a href="lista-rezultate.html?chestionar=${chestionar.getIdChestionar()}">sterge acest filtru</a> )
+     </h4>
+    #else
+
+</h4>
+    <div id="filtru">
+    <form action="lista-rezultate.html" method="GET"
+        <table class="jlu">
+        <colgroup><col width='100'/><col width="150"/><col width="300"/><col/> </colgroup>
+        <tr>
+            <td>
+                <input type="hidden" style="display:none" value="$chestionar.getIdChestionar()" name="chestionar"/>
+                <select name="entitate" style="width:100px" >
+                    <option value="serie" >Licenta</option>
+                    <option value="judet" >Judet</option>
+                    <option value="localitate" >Localitate</option>
+                    <option value="unitate" >Unitate</option>
+                    <option value="etapa" >Etapa</option>
+                    <option value="utilizator" >Utilizator</option>
+                </select>
+            </td>
+            <td>
+                <select name="filtru" style="width:150px">
+                    <option value="1">Egal cu</option>
+                    <option value="2">Diferit de</option>
+                    <option value="3">Like</option>
+                    <option value="4">Not like</option>
+                    <option value="5">Este NULL</option>
+                    <option value="6">Nu este NULL</option>
+                </select>
+            </td>
+            <td>
+                <input type="text" name="valoare" style="width:290px"/>
+            </td>
+            <td>
+                <input type="submit" value="Aplica filtru"/>
+            </td>
+        </tr>
+        </table>
+   </form><br/>
+   </div>
+ <br />
+   #end
+ <br/>
+
+<table class="layout" cellpadding="1" cellspacing="0">
+    <colgroup><col width="50"/><col/><col/></colgroup>
+    <tr>
+        <th  class="center">#springMessage("chestionar.nr")</th>
+        <th>Judet</th>
+        <th >Localitate</th>
+        <th >Unitate</th>
+        <th >Licenta</th>
+        <th >Etapa</th>
+        <th >Utilizator</th>
+        <th >#springMessage("view")</th>
+    </tr>
+#set($ctr=1)
+#foreach($rezultat in $setRezultat)
+    <tr>
+        <td class="center">$ctr</td>
+        <td >$rezultat.getJudet()</td>
+        <td >$rezultat.getLocalitate()</td>
+        <td >$rezultat.getUnitate()</td>
+        <td >$rezultat.getSerie()</td>
+        <td >$rezultat.getEtapa()</td>
+        <td ><a href="detalii-utilizator.html?utilizatorSistem=${rezultat.getUtilizator()}">$!{rezultat.getUtilizator()}</a> </td>
+
+        <td class="lastcol"><a href="process-chestionar.html?c=${chestionar.getIdChestionar()}&amp;sr=${rezultat.getIdSetRezultat()}&amp;stage=5">#springMessage("view")</a></td>
+
+    </tr>
+    #set($ctr=$ctr+1)
+#end
+</table>
+
+<br />
+<br />

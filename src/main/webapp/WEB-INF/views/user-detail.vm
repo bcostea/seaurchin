@@ -1,0 +1,30 @@
+<br />
+<br />
+<br />
+<br />
+
+
+<form action="detalii-utilizator.html" method="POST">
+    <input type="hidden" style="display:none" name="idUtilizator" value="$utilizator.getIdUtilizatorSistem()" />
+
+    <label for="nume">Nume utilizator</label><br/>
+    <input type="text" id="nume" name="nume" value="$utilizator.getNumeUtilizator()" disabled="disabled" style="width:250px;"/><br/>
+
+    <label for="email">Adresa de email</label><br />
+    <input type="text" id="email" name="email" value="$utilizator.getEmail()" style="width:250px;"/> <br/>
+
+    <label for="parola">Parola</label><br/>
+    <input type="password" id="parola" name="parola" style="width:250px;"/><br/>
+
+
+    <input type="checkbox" id="activ" name="activ" value="$utilizator.getActiv()"
+            #if( $admin!=true)
+                disabled="disabled"
+            #end
+            /> <label for="activ">Activ</label> <br /><br /><br />
+
+    #if( $admin==true || $user == $utilizator.getNumeUtilizator())
+    <input type="submit" name="action" value="Salveaza" />
+    #end
+
+</form>

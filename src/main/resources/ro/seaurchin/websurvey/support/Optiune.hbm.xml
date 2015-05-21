@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ro.seaurchin.websurvey.support.Optiune" table="OPTIUNE">
+        <id column="ID_OPTIUNE" name="idOptiune" type="java.lang.Long">
+            <generator class="org.hibernate.id.SequenceGenerator">
+                <param name="table">OPTIUNE_SEQ</param>
+                <param name="column">NEXT</param>
+            </generator>
+        </id>
+
+        <property column="NUME" name="nume" type="java.lang.String"/>
+        <property column="ID_TIP_OPTIUNE" name="idTipOptiune" type="java.lang.Long"/>
+
+    </class>
+</hibernate-mapping>

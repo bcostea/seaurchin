@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ro.seaurchin.websurvey.support.rezultate.SetRezultat" table="SET_REZULTAT">
+        <id column="ID_SET_REZULTAT" name="idSetRezultat" type="java.lang.Long">
+            <generator class="org.hibernate.id.SequenceGenerator">
+                <param name="table">SET_REZULTAT_SEQ</param>
+                <param name="column">NEXT</param>
+            </generator>
+        </id>
+        <set name="rezultate" lazy="false" inverse="true" cascade="all-delete-orphan" order-by="ID_REZULTAT">
+            <key column="ID_SET_REZULTAT"/>
+            <one-to-many class="ro.seaurchin.websurvey.support.rezultate.Rezultat"/>
+        </set>
+
+        <property column="ID_CHESTIONAR" name="idChestionar" type="java.lang.Long"/>
+        <property column="JUDET" name="judet" type="java.lang.String"/>
+        <property column="LOCALITATE" name="localitate" type="java.lang.String"/>
+        <property column="UNITATE" name="unitate" type="java.lang.String"/>
+        <property column="SERIE" name="serie" type="java.lang.String"/>
+        <property column="ETAPA" name="etapa" type="java.lang.String"/>
+        <property column="UTILIZATOR" name="utilizator" type="java.lang.String"/>
+
+
+    </class>
+</hibernate-mapping>
