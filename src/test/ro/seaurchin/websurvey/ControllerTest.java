@@ -1,4 +1,4 @@
-package ro.seaurchin.websurvey.test;
+package ro.seaurchin.websurvey;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
-import ro.seaurchin.websurvey.Controller;
 import ro.seaurchin.websurvey.support.Chestionar;
 import ro.seaurchin.websurvey.support.dao.ChestionarDao;
 import ro.seaurchin.websurvey.support.dao.UnitateInvatamantDao;
