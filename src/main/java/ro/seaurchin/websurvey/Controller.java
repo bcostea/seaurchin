@@ -1,21 +1,19 @@
 package ro.seaurchin.websurvey;
 
-import org.acegisecurity.context.SecurityContextHolder;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.RequestUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
-import java.util.HashMap;
-
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+import ro.seaurchin.websurvey.securitate.UtilizatorSistem;
+import ro.seaurchin.websurvey.securitate.dao.UtilizatorSistemDao;
 import ro.seaurchin.websurvey.support.dao.ChestionarDao;
 import ro.seaurchin.websurvey.support.dao.UnitateInvatamantDao;
 import ro.seaurchin.websurvey.support.dao.impl.SetRezultatDao;
 import ro.seaurchin.websurvey.support.util.FiltruLista;
-import ro.seaurchin.websurvey.securitate.UtilizatorSistem;
-import ro.seaurchin.websurvey.securitate.dao.UtilizatorSistemDao;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: BogdanCo
@@ -189,13 +187,12 @@ public class Controller extends MultiActionController
 
             case 5:
                 myModel.put("judetSelectat",setRezultatDao.getJudet(sr));
+                myModel.put("stage","5");
                 myModel.put("localitateSelectata",setRezultatDao.getLocalitate(sr));
                 myModel.put("unitateSelectata",setRezultatDao.getUnitate(sr));
                 myModel.put("serie",setRezultatDao.getSerie(sr));
                 myModel.put("etapa",setRezultatDao.getEtapa(sr));
-
                 myModel.put("setRezultat", sr);
-                myModel.put("stage","5");
                 break;
         }
         myModel.put("idChestionar",""+id);
