@@ -52,12 +52,20 @@ public class ControllerTest {
 
     private Chestionar chestionar;
     private final String addAction = "1";
+    private final String deleteAction = "3";
+    private final String showAction = "5"; // can be anything other than 1 or 3
+
     private final String judet = "un judet";
     private List unitati;
     private final String localitate = "localitate";
     private final String unitate = "unitate";
     private final String serie = "serie";
     private final String etapa = "etapa";
+    String idUser = "7";
+    String email = "a@b.com";
+    String password = "a big secret";
+    String username = "the user name";
+    UtilizatorSistem user;
 
     @Before
     public void setUp() {
@@ -69,6 +77,7 @@ public class ControllerTest {
         createRezultateMap();
         createChestionar();
         createUnitati();
+        createUser();
     }
 
     @Test
@@ -293,8 +302,7 @@ public class ControllerTest {
         ArrayList<Chestionar> chestionare = twoChestionare();
         when(chestionarDao.getChestionare()).thenReturn(chestionare);
         controller.setChestionarDao(chestionarDao);
-        String actiune = "3";
-        when(request.getParameter("actiune")).thenReturn(actiune);
+        when(request.getParameter("actiune")).thenReturn(deleteAction);
         mockGetJudete();
         mockGetChestionarDao();
         controller.setSetRezultatDao(setRezultatDao);
@@ -314,8 +322,7 @@ public class ControllerTest {
         ArrayList<Chestionar> chestionare = twoChestionare();
         when(chestionarDao.getChestionare()).thenReturn(chestionare);
         controller.setChestionarDao(chestionarDao);
-        String actiune = "5"; // can be anything other than 1 or 3
-        when(request.getParameter("actiune")).thenReturn(actiune);
+        when(request.getParameter("actiune")).thenReturn(showAction);
 
         ModelAndView modelAndView = controller.processChestionar(request, response);
         Map modelMap = modelAndView.getModelMap();
@@ -339,9 +346,6 @@ public class ControllerTest {
 
     @Test
     public void testSaveUserDetail() throws Exception{
-        String idUser = "7";
-        String email = "a@b.com";
-        String password = "a big secret";
         UtilizatorSistemDao utilizatorSistemDao = mock(UtilizatorSistemDao.class);
         controller.setUtilizatorSistemDao(utilizatorSistemDao);
         when(request.getParameter("action")).thenReturn("Salveaza");
@@ -359,8 +363,6 @@ public class ControllerTest {
 
     @Test
     public void testViewUserDetail() throws Exception{
-        String username = "the user name";
-        UtilizatorSistem user = new UtilizatorSistem();
         when(request.getParameter("utilizatorSistem")).thenReturn(username);
         UtilizatorSistemDao utilizatorSistemDao = mock(UtilizatorSistemDao.class);
         controller.setUtilizatorSistemDao(utilizatorSistemDao);
@@ -441,5 +443,9 @@ public class ControllerTest {
 
     private void createResults() {
         results = new ArrayList();
+    }
+
+    private void createUser() {
+        user = new UtilizatorSistem();
     }
 }
