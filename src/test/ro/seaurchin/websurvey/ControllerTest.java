@@ -6,6 +6,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
+import ro.seaurchin.websurvey.securitate.UtilizatorSistem;
+import ro.seaurchin.websurvey.securitate.dao.UtilizatorSistemDao;
 import ro.seaurchin.websurvey.support.Chestionar;
 import ro.seaurchin.websurvey.support.dao.ChestionarDao;
 import ro.seaurchin.websurvey.support.dao.UnitateInvatamantDao;
@@ -13,13 +15,14 @@ import ro.seaurchin.websurvey.support.dao.impl.SetRezultatDao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ControllerTest {
 
@@ -283,6 +286,94 @@ public class ControllerTest {
         assertEquals(chestionar, model.get("chestionar"));
         assertEquals(rezultateMap, model.get("rezultateMap"));
         assertEquals("chestionar", model.get("pagina"));
+    }
+
+    @Test
+    public void testProcessChestionarDelete() throws Exception {
+        ArrayList<Chestionar> chestionare = twoChestionare();
+        when(chestionarDao.getChestionare()).thenReturn(chestionare);
+        controller.setChestionarDao(chestionarDao);
+        String actiune = "3";
+        when(request.getParameter("actiune")).thenReturn(actiune);
+        mockGetJudete();
+        mockGetChestionarDao();
+        controller.setSetRezultatDao(setRezultatDao);
+        when(request.getParameter("sr")).thenReturn(idSetRezultat.toString());
+
+        ModelAndView modelAndView = controller.processChestionar(request, response);
+        Map modelMap = modelAndView.getModelMap();
+
+        assertViewIsIndex(modelAndView);
+        verify(setRezultatDao).stergeSetRezultate(idSetRezultat);
+        assertArrayEquals(chestionare.toArray(), (Object[]) modelMap.get("chestionare"));
+        assertEquals("chestionar-content", modelMap.get("pagina"));
+    }
+
+    @Test
+    public void testProcessChestionarShow() throws Exception {
+        ArrayList<Chestionar> chestionare = twoChestionare();
+        when(chestionarDao.getChestionare()).thenReturn(chestionare);
+        controller.setChestionarDao(chestionarDao);
+        String actiune = "5"; // can be anything other than 1 or 3
+        when(request.getParameter("actiune")).thenReturn(actiune);
+
+        ModelAndView modelAndView = controller.processChestionar(request, response);
+        Map modelMap = modelAndView.getModelMap();
+
+        assertViewIsIndex(modelAndView);
+        assertArrayEquals(chestionare.toArray(), (Object[]) modelMap.get("chestionare"));
+        assertEquals("chestionar-content", modelMap.get("pagina"));
+    }
+
+    @Test
+    public void testDoLogout() throws Exception{
+        HttpSession session = mock(HttpSession.class);
+        when(request.getSession()).thenReturn(session);
+
+        ModelAndView modelAndView = controller.doLogout(request, response);
+
+        assertNull(modelAndView);
+        verify(session).invalidate();
+        verify(response).sendRedirect("index.html");
+    }
+
+    @Test
+    public void testSaveUserDetail() throws Exception{
+        String idUser = "7";
+        String email = "a@b.com";
+        String password = "a big secret";
+        UtilizatorSistemDao utilizatorSistemDao = mock(UtilizatorSistemDao.class);
+        controller.setUtilizatorSistemDao(utilizatorSistemDao);
+        when(request.getParameter("action")).thenReturn("Salveaza");
+        when(request.getParameter("idUtilizator")).thenReturn(idUser);
+        when(request.getParameter("email")).thenReturn(email);
+        when(request.getParameter("parola")).thenReturn(password);
+
+        ModelAndView modelAndView = controller.userDetail(request, response);
+        ModelMap modelMap = modelAndView.getModelMap();
+
+        assertViewIsIndex(modelAndView);
+        assertEquals("index-content", modelMap.get("pagina"));
+        verify(utilizatorSistemDao).updateUser(idUser, email, password);
+    }
+
+    @Test
+    public void testViewUserDetail() throws Exception{
+        String username = "the user name";
+        UtilizatorSistem user = new UtilizatorSistem();
+        when(request.getParameter("utilizatorSistem")).thenReturn(username);
+        UtilizatorSistemDao utilizatorSistemDao = mock(UtilizatorSistemDao.class);
+        controller.setUtilizatorSistemDao(utilizatorSistemDao);
+        when(utilizatorSistemDao.getUtilizator(username)).thenReturn(user);
+        when(request.getParameter("action")).thenReturn("Vizualizeaza");
+
+        ModelAndView modelAndView = controller.userDetail(request, response);
+        ModelMap modelMap = modelAndView.getModelMap();
+
+        assertViewIsIndex(modelAndView);
+        assertEquals("user-detail", modelMap.get("pagina"));
+        assertEquals(user, modelMap.get("utilizator"));
+
     }
 
     private void createUnitati() {
