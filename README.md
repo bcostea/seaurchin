@@ -11,3 +11,10 @@ Changes:
 Code is mostly Romanian.
 
 Tested on Tomcat7 64bit vanilla and it works.
+
+## How to Run
+
+Run in embedded tomcat7 with mvn tomcat7:run-war.
+
+Or deploy to tomcat and run it in server.
+
