@@ -169,15 +169,15 @@ public class Controller extends MultiActionController
             case 3:
                 myModel.put("judetSelectat",judetSelectat);
                 myModel.put("stage","3");
-                myModel.put("localitateSelectata",localitateSelectata);
                 myModel.put("localitati",unitateInvatamantDao.getLocalitatiForJudet(judetSelectat));
+                myModel.put("localitateSelectata",localitateSelectata);
                 myModel.put("unitati",unitateInvatamantDao.getUnitatiForJudetAndLocalitate(judetSelectat,localitateSelectata));
                 break;
             case 4:
                 myModel.put("judetSelectat",judetSelectat);
                 myModel.put("stage","4");
-                myModel.put("localitateSelectata",localitateSelectata);
                 myModel.put("localitati",unitateInvatamantDao.getLocalitatiForJudet(judetSelectat));
+                myModel.put("localitateSelectata",localitateSelectata);
                 myModel.put("unitati",unitateInvatamantDao.getUnitatiForJudetAndLocalitate(judetSelectat,localitateSelectata));
                 myModel.put("unitateSelectata",unitateSelectata);
                 myModel.put("serie",unitateInvatamantDao.getSerieForUnitateDinJudetSiLocalitate(judetSelectat,localitateSelectata,unitateSelectata));
@@ -195,10 +195,12 @@ public class Controller extends MultiActionController
                 myModel.put("setRezultat", sr);
                 break;
         }
+
         myModel.put("idChestionar",""+id);
         myModel.put("chestionar",chestionarDao.getChestionar(id));
         myModel.put("rezultateMap", chestionarDao.getRezultateMap(id,sr));
         myModel.put("pagina","chestionar");
+
         return new ModelAndView("index", myModel);
     }
 
